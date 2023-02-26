@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Content;
 
-namespace NVS.Core.Interface;
+namespace NVS.Engine.Interface;
 
 public interface ILoad
 {

@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine.GameObject;
 
 namespace NVS.Core.GameObject;
 

@@ -1,7 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine.Interface;
 
-namespace NVS.Core.GameObject;
+namespace NVS.Engine.GameObject;
 
 public abstract class Entity : IDraw, IUpdate
 {

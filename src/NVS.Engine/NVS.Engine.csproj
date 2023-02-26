@@ -7,7 +7,4 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NVS.Engine\NVS.Engine.csproj" />
-  </ItemGroup>
 </Project>

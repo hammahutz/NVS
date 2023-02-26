@@ -3,8 +3,9 @@ using System.Linq;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine.Interface;
 
-namespace NVS.Core.GameObject;
+namespace NVS.Engine.GameObject;
 
 public class EntityManager : IUpdate, IDraw
 {

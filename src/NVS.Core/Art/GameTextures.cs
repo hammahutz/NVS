@@ -1,22 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using NVS.Core.Interface;
+using NVS.Engine.Art;
 
-namespace NVS.Core;
+namespace NVS.Core.Art;
 
-public class Art
+public partial class GameArt
 {
-    public GameTextures Gfx = new GameTextures();
-
-
-    public void Load(ContentManager content)
-    {
-        Gfx.Load(content);
-    }
-
-    public class GameTextures : ILoad
+    public class GameTextures : ArtAsset
     {
 
         public Texture2D Player { get; private set; }
@@ -25,7 +15,7 @@ public class Art
         public Texture2D Bullet { get; private set; }
         public Texture2D Pointer { get; private set; }
 
-        public void Load(ContentManager content)
+        public override void Load(ContentManager content)
         {
             Player = content.Load<Texture2D>("GFX/Player");
             Seeker = content.Load<Texture2D>("GFX/Seeker");
@@ -33,6 +23,7 @@ public class Art
             Bullet = content.Load<Texture2D>("GFX/Bullet");
             Pointer = content.Load<Texture2D>("GFX/Pointer");
         }
+
     }
 }
 
