@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using NVS.Core.Art;
+using Newtonsoft.Json;
 using NVS.Core.GameObject;
 using NVS.Core.State;
 using NVS.Engine.Interface;
@@ -11,8 +12,9 @@ namespace NVS.Core;
 
 public class GameLoop : Game
 {
-    List<IState> States;
+    Dictionary<string, IState> States;
     IState CurrentState;
+
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -32,19 +34,18 @@ public class GameLoop : Game
 
     protected override void Initialize()
     {
-        States = new List<IState>() { new GamePlayState() };
-        CurrentState = States[0];
-
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        States = new Dictionary<string, IState>() { { nameof(GamePlayState), new GamePlayState() } };
+        CurrentState = States[nameof(GamePlayState)];
+
+
         CurrentState.Initialize();
-        // _entityManager = new EntityManager();
 
         base.Initialize();
-        // _entityManager.Add(PlayerShip.Instance);
     }
 
-    protected override void LoadContent() => CurrentState.LoadContent();
+    protected override void LoadContent() => CurrentState.LoadContent(Content);
 
     protected override void Update(GameTime gameTime)
     {
@@ -68,10 +69,11 @@ public class GameLoop : Game
     }
 
 
-    public void SwitchState(int state)
+    public void SwitchState(string state)
     {
         CurrentState.UnloadContent();
         CurrentState = States[state];
-        CurrentState.LoadContent();
+        CurrentState.Initialize();
+        CurrentState.LoadContent(Content);
     }
 }

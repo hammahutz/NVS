@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NVS.Engine.Interface;
 
@@ -29,6 +30,8 @@ public class EntityManager : IUpdate, IDraw
             _addedEntitys.Add(entity);
         }
     }
+
+    public void LoadContent(ContentManager contentManager) => _entitys.ForEach(e => e.Load(contentManager));
 
 
     public void Update(GameTime gameTime)

@@ -6,9 +6,10 @@ using Microsoft.Xna.Framework.Content;
 using NVS.Engine.Interface;
 
 
-namespace NVS.Engine.Art;
+namespace NVS.Engine.Interface;
 
-public abstract class ArtAsset 
+public interface IArt 
 {
-    public abstract void Load(ContentManager content);
+    public void Load(ContentManager content);
+    public void Unload(ContentManager content);
 }

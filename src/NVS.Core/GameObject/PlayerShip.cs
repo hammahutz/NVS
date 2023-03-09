@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NVS.Engine.GameObject;
 
@@ -6,7 +7,6 @@ namespace NVS.Core.GameObject;
 
 public class PlayerShip : Entity
 {
-    public override Texture2D Gfx => GameLoop.Art.Gfx.Player;
     private static PlayerShip _instance;
     public static PlayerShip Instance
     {
@@ -27,8 +27,10 @@ public class PlayerShip : Entity
         Radius = 10;
     }
 
+    public override void Load(ContentManager content) => Gfx = content.Load<Texture2D>(Art.Player);
 
     public override void Update(GameTime gameTime)
     {
     }
+
 }

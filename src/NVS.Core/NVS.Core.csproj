@@ -6,8 +6,12 @@
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NVS.Engine\NVS.Engine.csproj" />
+  </ItemGroup>
+  <ItemGroup >
+    <None Update="Art/art.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

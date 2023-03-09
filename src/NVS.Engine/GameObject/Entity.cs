@@ -1,12 +1,14 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine.Art;
 using NVS.Engine.Interface;
 
 namespace NVS.Engine.GameObject;
 
-public abstract class Entity : IDraw, IUpdate
+public abstract class Entity : IDraw, IUpdate, ILoad
 {
-    public abstract Texture2D Gfx { get;  } 
+    public Texture2D Gfx { get; set; }
     public Vector2 Position { get; set; } = Vector2.Zero;
     public Rectangle? SourceRectangle { get; set; }
     public Color Color { get; private set; } = Color.White;
@@ -19,8 +21,15 @@ public abstract class Entity : IDraw, IUpdate
     public bool IsExpired { get; set; } = false;
     public float Radius { get; set; } = 1.0f;
 
+    public abstract void Load(ContentManager content);
 
     public abstract void Update(GameTime gameTime);
-    public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(Gfx, Position, SourceRectangle, Color, Rotation, Origin, Scale, SpriteEffects, LayerDepth);
+    public virtual void Draw(SpriteBatch spriteBatch)
+    {
+        if (Gfx is not null)
+        {
+            spriteBatch.Draw(Gfx, Position, SourceRectangle, Color, Rotation, Origin, Scale, SpriteEffects, LayerDepth);
+        }
+    }
 
 }
