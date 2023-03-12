@@ -48,4 +48,9 @@ public static class Art
     #endregion
     #endregion
 
+    #region Fonts
+    public const string Debug = "Font/Debug";
+    #endregion
+
+
 }

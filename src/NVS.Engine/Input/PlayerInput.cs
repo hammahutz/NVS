@@ -11,6 +11,6 @@ public abstract class PlayerInput
     public PlayerInput(InputManager inputManager) => OnInput += inputManager.SwitchState;
     protected abstract event EventHandler<OnInputEventArgs> OnInput;
     public abstract void UpdateState();
-    public abstract Vector2 GetMovementDirection();
-    public abstract Vector2 GetAimDirection();
+    public abstract Vector2 GetMovementDirection(Vector2 orgin);
+    public abstract Vector2 GetAimDirection(Vector2 orgin);
 }

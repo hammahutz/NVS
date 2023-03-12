@@ -1,28 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace NVS.Engine.Input;
 
 public class InputManager
 {
-    public Dictionary<string, PlayerInput> PlayerInputs;
-    public PlayerInput ActivePlayerMovementInput;
-    public PlayerInput ActivePlayerAimInput;
+    public string CurrentMovementDevice{ get => _activePlayerMovementInput.ToString(); } 
+    public string CurrentAimDevice{ get => _activePlayerAimInput.ToString(); } 
+    private Dictionary<string, PlayerInput> _playerInputs;
+    private PlayerInput _activePlayerMovementInput;
+    private PlayerInput _activePlayerAimInput;
 
     public InputManager()
     {
-        PlayerInputs = new Dictionary<string, PlayerInput>()
+        _playerInputs = new Dictionary<string, PlayerInput>()
         {
             { nameof(KeyboardPlayerInput), new KeyboardPlayerInput(this) },
             { nameof(MousePlayerInput), new MousePlayerInput(this) },
             { nameof(GamePadPlayerInput), new GamePadPlayerInput(this) },
             { nameof(TouchPlayerInput), new TouchPlayerInput(this) },
-
         };
 
-        ActivePlayerMovementInput = PlayerInputs[nameof(KeyboardPlayerInput)];
-        ActivePlayerAimInput = PlayerInputs[nameof(KeyboardPlayerInput)];
+        _activePlayerMovementInput = _playerInputs[nameof(KeyboardPlayerInput)];
+        _activePlayerAimInput = _playerInputs[nameof(KeyboardPlayerInput)];
     }
 
     public void Update()
@@ -30,43 +32,40 @@ public class InputManager
         UpdateState();
     }
 
-    private void UpdateState() => PlayerInputs.ToList().ForEach(pi => pi.Value.UpdateState());
+    private void UpdateState() => _playerInputs.ToList().ForEach(pi => pi.Value.UpdateState());
     public void SwitchState(object sender, OnInputEventArgs e)
     {
-        Console.WriteLine($"Key pressed\nSender: {sender}\nAim : {e.Aim}\n");
         switch (e.Aim)
         {
             case Aim.None:
-                ActivePlayerMovementInput = PlayerInputs[nameof(KeyboardPlayerInput)];
-                if (ActivePlayerAimInput != PlayerInputs[nameof(MousePlayerInput)])
+                _activePlayerMovementInput = _playerInputs[nameof(KeyboardPlayerInput)];
+                if (_activePlayerAimInput != _playerInputs[nameof(MousePlayerInput)])
                 {
-                    ActivePlayerAimInput = PlayerInputs[nameof(KeyboardPlayerInput)];
+                    _activePlayerAimInput = _playerInputs[nameof(KeyboardPlayerInput)];
                 }
                 break;
 
             case Aim.Keys:
-                ActivePlayerMovementInput = PlayerInputs[nameof(KeyboardPlayerInput)];
-                ActivePlayerAimInput = PlayerInputs[nameof(KeyboardPlayerInput)];
+                _activePlayerMovementInput = _playerInputs[nameof(KeyboardPlayerInput)];
+                _activePlayerAimInput = _playerInputs[nameof(KeyboardPlayerInput)];
                 break;
 
             case Aim.Mouse:
-                ActivePlayerMovementInput = PlayerInputs[nameof(KeyboardPlayerInput)];
-                ActivePlayerAimInput = PlayerInputs[nameof(MousePlayerInput)];
+                _activePlayerMovementInput = _playerInputs[nameof(KeyboardPlayerInput)];
+                _activePlayerAimInput = _playerInputs[nameof(MousePlayerInput)];
                 break;
 
             case Aim.GamePad:
-                ActivePlayerMovementInput = PlayerInputs[nameof(GamePadPlayerInput)];
-                ActivePlayerAimInput = PlayerInputs[nameof(GamePadPlayerInput)];
+                _activePlayerMovementInput = _playerInputs[nameof(GamePadPlayerInput)];
+                _activePlayerAimInput = _playerInputs[nameof(GamePadPlayerInput)];
                 break;
 
             case Aim.Touch:
-                ActivePlayerMovementInput = PlayerInputs[nameof(TouchPlayerInput)];
-                ActivePlayerAimInput = PlayerInputs[nameof(TouchPlayerInput)];
+                _activePlayerMovementInput = _playerInputs[nameof(TouchPlayerInput)];
+                _activePlayerAimInput = _playerInputs[nameof(TouchPlayerInput)];
                 break;
         }
-
-        Console.WriteLine($"Dir: {ActivePlayerMovementInput}\nAim: {ActivePlayerAimInput}");
     }
-    public virtual void GetMovementDirection() => ActivePlayerMovementInput.GetMovementDirection();
-    public virtual void GetAimDirection() => ActivePlayerAimInput.GetAimDirection();
+    public Vector2 GetMovementDirection(Vector2 orgin) => _activePlayerMovementInput.GetMovementDirection(orgin);
+    public Vector2 GetAimDirection(Vector2 orgin) => _activePlayerAimInput.GetAimDirection(orgin);
 }

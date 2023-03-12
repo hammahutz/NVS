@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NVS.Engine.GameObject;
+using NVS.Engine.Input;
 
 namespace NVS.Core.GameObject;
 
@@ -31,6 +32,11 @@ public class PlayerShip : Entity
 
     public override void Update(GameTime gameTime)
     {
+    }
+
+    public void HandleInput(InputManager inputManager)
+    {
+        
     }
 
 }

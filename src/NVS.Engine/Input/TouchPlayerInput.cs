@@ -11,13 +11,13 @@ public class TouchPlayerInput : PlayerInput
 
     protected override event EventHandler<OnInputEventArgs> OnInput;
 
-    public override Vector2 GetAimDirection()
+    public override Vector2 GetAimDirection(Vector2 origin)
     {
         //TODO implement smartphone controlls
         throw new NotImplementedException();
     }
 
-    public override Vector2 GetMovementDirection()
+    public override Vector2 GetMovementDirection(Vector2 origin)
     {
         throw new NotImplementedException();
     }

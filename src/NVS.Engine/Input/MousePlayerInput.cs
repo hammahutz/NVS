@@ -13,16 +13,13 @@ public class MousePlayerInput : PlayerInput
 
     protected override event EventHandler<OnInputEventArgs> OnInput;
 
-    public override Vector2 GetAimDirection()
+    public override Vector2 GetAimDirection(Vector2 orgin)
     {
-        throw new NotImplementedException();
+        Vector2 direction = _mouseState.Position.ToVector2() - orgin;
+        return direction != Vector2.Zero ? Vector2.Normalize(direction) : Vector2.Zero;
     }
 
-    public override Vector2 GetMovementDirection()
-    {
-        throw new NotImplementedException();
-    }
-
+    public override Vector2 GetMovementDirection(Vector2 orgin) => Vector2.Zero;
     public override void UpdateState()
     {
         _lastMouseState = _mouseState;

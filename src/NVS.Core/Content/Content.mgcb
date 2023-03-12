@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../res/Content/Font/Debug.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:../../../res/Content/Font/Debug.spritefont;Font/Debug.spritefont
+
 #begin ../../../res/Content/GFX/Black Hole.png
 /importer:TextureImporter
 /processor:TextureProcessor
