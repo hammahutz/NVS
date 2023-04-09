@@ -7,13 +7,13 @@ namespace NVS.Engine.Input;
 public class GamePadPlayerInput : PlayerInput
 {
     private GamePadState _gamePadState, _lastgamePadState;
-    public GamePadPlayerInput(InputManager inputManager) : base(inputManager){}
+    public GamePadPlayerInput(InputManager inputManager) : base(inputManager) { }
 
     protected override event EventHandler<OnInputEventArgs> OnInput;
 
     public override Vector2 GetAimDirection(Vector2 orgin) => _gamePadState.ThumbSticks.Right;
 
-    public override Vector2 GetMovementDirection(Vector2 orgin) => _gamePadState.ThumbSticks.Left;
+    public override Vector2 GetMovementDirection(Vector2 orgin) => new(_gamePadState.ThumbSticks.Left.X, -_gamePadState.ThumbSticks.Left.Y);
 
     public override void UpdateState()
     {

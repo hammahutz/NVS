@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine;
 using NVS.Engine.GameObject;
 using NVS.Engine.Input;
 
@@ -22,21 +24,32 @@ public class PlayerShip : Entity
     }
 
 
+
     private PlayerShip()
     {
+        Sprites = new List<Sprite>();
         Position = GameLoop.ScreenSize / 2;
-        Radius = 10;
+        Radius = 10f;
+        Speed = 200f;
+
+
     }
 
-    public override void Load(ContentManager content) => Gfx = content.Load<Texture2D>(Art.Player);
+    public override void Load(ArtHandler artHandler) => Sprites.Add(new Sprite(artHandler.GFX[Art.GFXPlayer]));
 
-    public override void Update(GameTime gameTime)
+    protected override void UpdateEntity(GameTime gameTime)
     {
+        Position = Vector2.Clamp(Position, Size.Size.ToVector2() / 2, GameLoop.ScreenSize - Size.Size.ToVector2() / 2);
+
+        if (Velocity.LengthSquared() > 0f)
+        {
+            Roatation = Direction.ToAngle();
+        }
     }
 
     public void HandleInput(InputManager inputManager)
     {
-        
+        Direction = inputManager.GetMovementDirection(Position);
     }
 
 }

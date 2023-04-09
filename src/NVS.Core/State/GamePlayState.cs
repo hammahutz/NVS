@@ -13,7 +13,8 @@ namespace NVS.Core.State;
 public class GamePlayState : IState
 {
     private EntityManager _entityManager;
-    private InputManager _inputManager;
+    private ArtGameplay _art;
+    public static InputManager _inputManager;
 
     public static SpriteFont DebugFont;
 
@@ -21,28 +22,31 @@ public class GamePlayState : IState
     public void Initialize()
     {
         _inputManager = new InputManager();
+       _entityManager = new EntityManager();
+        _art = new ArtGameplay();
 
-        _entityManager = new EntityManager();
-        _entityManager.Add(PlayerShip.Instance);
     }
     public void LoadContent(ContentManager contentMangaer)
     {
-        _entityManager.LoadContent(contentMangaer);
-        DebugFont = contentMangaer.Load<SpriteFont>(Art.Debug);
+        _art.LoadContent(contentMangaer);
+
+        DebugFont = contentMangaer.Load<SpriteFont>(ArtPath.Paths[Art.FontDebug]);
+
+        _entityManager.Add(PlayerShip.Instance, _art);
     }
     public void Update(GameTime gameTime)
     {
         _inputManager.Update();
+        PlayerShip.Instance.HandleInput(_inputManager);
+        
         _entityManager.Update(gameTime);
-        
-        
     }
     public void Draw(SpriteBatch spriteBatch)
     {
         _entityManager.Draw(spriteBatch);
 
         spriteBatch.DrawString(DebugFont,
-        $"Movement\nDevice: {_inputManager.CurrentMovementDevice}\nDirection: {_inputManager.GetMovementDirection(PlayerShip.Instance.Position)}\n\nAim\nDevice {_inputManager.CurrentAimDevice}\nDirection: {_inputManager.GetAimDirection(PlayerShip.Instance.Position)}",
+        $"Pos: {PlayerShip.Instance.Position}\nVelodity: {PlayerShip.Instance.Velocity}\nDir: {PlayerShip.Instance.Direction}\nSpeed: {PlayerShip.Instance.Speed}\nRot: {PlayerShip.Instance.Roatation}\nRotVel: {PlayerShip.Instance.RotationVelocity}\nRotDir: {PlayerShip.Instance.RoatationDirection}\nAngSpeed: {PlayerShip.Instance.AngularSpeed}",
         Vector2.Zero, Color.GreenYellow);
     }
     public void UnloadContent()

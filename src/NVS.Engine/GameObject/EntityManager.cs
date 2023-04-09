@@ -13,14 +13,14 @@ public class EntityManager : IUpdate, IDraw
     private List<Entity> _entitys = new List<Entity>();
     private List<Entity> _addedEntitys = new List<Entity>();
 
-
     private bool _isUpdateing;
 
     public int Count { get => _entitys.Count; }
 
 
-    public void Add(Entity entity)
+    public void Add(Entity entity, ArtHandler artHandler)
     {
+        entity.Load(artHandler);
         if (!_isUpdateing)
         {
             _entitys.Add(entity);
@@ -30,8 +30,6 @@ public class EntityManager : IUpdate, IDraw
             _addedEntitys.Add(entity);
         }
     }
-
-    public void LoadContent(ContentManager contentManager) => _entitys.ForEach(e => e.Load(contentManager));
 
 
     public void Update(GameTime gameTime)
