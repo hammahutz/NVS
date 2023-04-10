@@ -30,4 +30,5 @@ public class MousePlayerInput : PlayerInput
             OnInput?.Invoke(this, new OnInputEventArgs { Aim = Aim.Mouse });
         }
     }
+    public Vector2 GetMousePostion => Mouse.GetState().Position.ToVector2();
 }

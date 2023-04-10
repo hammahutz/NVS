@@ -9,7 +9,9 @@ namespace NVS.Engine.GameObject;
 
 public abstract class ArtHandler
 {
-    public Dictionary<Enum, Texture2D> GFX;
+    public Dictionary<Enum, Texture2D> GFX = new Dictionary<Enum, Texture2D>();
+    public Dictionary<Enum, SpriteFont> Fonts = new Dictionary<Enum, SpriteFont>();
+    
     public abstract void LoadContent(ContentManager contentManager);
     public abstract void UnloadContent(ContentManager contentManager);
 }

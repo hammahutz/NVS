@@ -6,6 +6,7 @@
 #Own
 .config
 .vscode
+**/*Backup
 
 # User-specific files
 *.rsuser

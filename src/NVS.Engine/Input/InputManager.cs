@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace NVS.Engine.Input;
 
@@ -12,6 +13,8 @@ public class InputManager
     private Dictionary<string, PlayerInput> _playerInputs;
     private PlayerInput _activePlayerMovementInput;
     private PlayerInput _activePlayerAimInput;
+
+    private bool Pointer;
 
     public InputManager()
     {
@@ -68,4 +71,6 @@ public class InputManager
     }
     public Vector2 GetMovementDirection(Vector2 orgin) => _activePlayerMovementInput.GetMovementDirection(orgin);
     public Vector2 GetAimDirection(Vector2 orgin) => _activePlayerAimInput.GetAimDirection(orgin);
+    public Vector2 GetPointer() => Mouse.GetState().Position.ToVector2();
+
 }

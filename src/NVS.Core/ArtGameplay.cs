@@ -12,8 +12,16 @@ public class ArtGameplay : ArtHandler
 {
     public override void LoadContent(ContentManager contentManager)
     {
-        GFX = new Dictionary<Enum, Texture2D>(){
+        GFX = new Dictionary<Enum, Texture2D>()
+        {
             {Art.GFXPlayer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXPlayer])},
+            {Art.GFXBullet, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXBullet])},
+            {Art.GFXPointer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXPointer])},
+        };
+
+        Fonts = new Dictionary<Enum, SpriteFont>()
+        {
+            {Art.FontDebug, contentManager.Load<SpriteFont>(ArtPath.Paths[Art.FontDebug])},
         };
     }
 

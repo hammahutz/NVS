@@ -22,8 +22,6 @@ public class GameLoop : Game
     public static Viewport Viewport { get { return Instance.GraphicsDevice.Viewport; } }
     public static Vector2 ScreenSize { get { return new Vector2(Viewport.Width, Viewport.Height); } }
 
-
-
     public GameLoop()
     {
         Instance = this;

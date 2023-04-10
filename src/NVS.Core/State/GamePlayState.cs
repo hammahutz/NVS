@@ -2,6 +2,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 using NVS.Core.GameObject;
 using NVS.Engine.GameObject;
@@ -13,32 +14,39 @@ namespace NVS.Core.State;
 public class GamePlayState : IState
 {
     private EntityManager _entityManager;
-    private ArtGameplay _art;
+    private ArtGameplay _gameplayArt;
     public static InputManager _inputManager;
 
     public static SpriteFont DebugFont;
+    public static Texture2D Pointer;
 
 
     public void Initialize()
     {
         _inputManager = new InputManager();
-       _entityManager = new EntityManager();
-        _art = new ArtGameplay();
 
+        _gameplayArt = new ArtGameplay();
+
+        _entityManager = new EntityManager(_gameplayArt);
+        PlayerShip.Instance.SetSpawner(_entityManager);
     }
     public void LoadContent(ContentManager contentMangaer)
     {
-        _art.LoadContent(contentMangaer);
+        _gameplayArt.LoadContent(contentMangaer);
 
-        DebugFont = contentMangaer.Load<SpriteFont>(ArtPath.Paths[Art.FontDebug]);
+        DebugFont = _gameplayArt.Fonts[Art.FontDebug];
+        Pointer = _gameplayArt.GFX[Art.GFXPointer];
+        Mouse.SetCursor(MouseCursor.FromTexture2D(_gameplayArt.GFX[Art.GFXPointer], 5, 0));
 
-        _entityManager.Add(PlayerShip.Instance, _art);
+
+        _entityManager.Add(PlayerShip.Instance);
+        _entityManager.Add(new Bullet(new Vector2(200, 200), new Vector2(1, 0)));
     }
     public void Update(GameTime gameTime)
     {
         _inputManager.Update();
         PlayerShip.Instance.HandleInput(_inputManager);
-        
+
         _entityManager.Update(gameTime);
     }
     public void Draw(SpriteBatch spriteBatch)

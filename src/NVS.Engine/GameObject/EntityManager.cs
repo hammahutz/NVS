@@ -12,15 +12,17 @@ public class EntityManager : IUpdate, IDraw
 {
     private List<Entity> _entitys = new List<Entity>();
     private List<Entity> _addedEntitys = new List<Entity>();
+    private ArtHandler _artHandler;
 
     private bool _isUpdateing;
 
     public int Count { get => _entitys.Count; }
 
+    public EntityManager(ArtHandler artHandler) => _artHandler = artHandler;
 
-    public void Add(Entity entity, ArtHandler artHandler)
+    public void Add(Entity entity)
     {
-        entity.Load(artHandler);
+        entity.Load(_artHandler);
         if (!_isUpdateing)
         {
             _entitys.Add(entity);
@@ -30,6 +32,8 @@ public class EntityManager : IUpdate, IDraw
             _addedEntitys.Add(entity);
         }
     }
+
+    public void SpawnEntity(object sender, OnEntitySpawn onEntitySpawn) => Add(onEntitySpawn.Entity);
 
 
     public void Update(GameTime gameTime)
