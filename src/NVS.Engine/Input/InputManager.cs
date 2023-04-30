@@ -14,8 +14,6 @@ public class InputManager
     private PlayerInput _activePlayerMovementInput;
     private PlayerInput _activePlayerAimInput;
 
-    private bool Pointer;
-
     public InputManager()
     {
         _playerInputs = new Dictionary<string, PlayerInput>()
@@ -71,6 +69,6 @@ public class InputManager
     }
     public Vector2 GetMovementDirection(Vector2 orgin) => _activePlayerMovementInput.GetMovementDirection(orgin);
     public Vector2 GetAimDirection(Vector2 orgin) => _activePlayerAimInput.GetAimDirection(orgin);
-    public Vector2 GetPointer() => Mouse.GetState().Position.ToVector2();
+    public static Vector2 GetPointer() => Mouse.GetState().Position.ToVector2();
 
 }

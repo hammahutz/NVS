@@ -14,7 +14,7 @@ public abstract class Entity : IDraw, IUpdate
     private float _rotationDirection;
 
     protected List<Sprite> Sprites { get; set; } = new List<Sprite>();
-    public Rectangle Size { get => (Sprites[0].Gfx.Bounds != null) ? Sprites[0].Gfx.Bounds : Rectangle.Empty; }
+    public Rectangle Size { get => (Sprites[0] != null) ? Sprites[0].Gfx.Bounds : Rectangle.Empty; }
 
     public Vector2 Position { get; set; } = Vector2.Zero;
     public Vector2 Velocity { get; set; } = Vector2.Zero;
