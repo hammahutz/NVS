@@ -40,7 +40,7 @@ public class GamePlayState : IState
 
 
         _entityManager.Add(PlayerShip.Instance);
-        _entityManager.Add(new Bullet(new Vector2(200, 200), new Vector2(1, 0)));
+        _entityManager.Add(new Seeker(new Vector2(100, 100)));
     }
     public void Update(GameTime gameTime)
     {

@@ -13,6 +13,7 @@ public static class Util
     public static float ToAngle(this Vector2 vector) => MathF.Atan2(vector.Y, vector.X);
     public static Vector2 ToAngle(this float angle) => new Vector2(MathF.Cos(angle), MathF.Sin(angle));
     public static float NextFloat(this Random rnd, float minValue, float maxValue) => (float)rnd.NextDouble() * (maxValue - minValue) + minValue;
+    public static Vector2 ScaleTo(this Vector2 vector, float length) => vector * (length / vector.Length());
 
     #endregion
 

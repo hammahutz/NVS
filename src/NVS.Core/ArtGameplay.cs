@@ -17,6 +17,7 @@ public class ArtGameplay : ArtHandler
             {Art.GFXPlayer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXPlayer])},
             {Art.GFXBullet, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXBullet])},
             {Art.GFXPointer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXPointer])},
+            {Art.GFXSeeker, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXSeeker])},
         };
 
         Fonts = new Dictionary<Enum, SpriteFont>()
