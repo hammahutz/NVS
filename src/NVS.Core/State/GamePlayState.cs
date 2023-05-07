@@ -41,6 +41,9 @@ public class GamePlayState : IState
 
         _entityManager.Add(PlayerShip.Instance);
         _entityManager.Add(new Seeker(new Vector2(100, 100)));
+        _entityManager.Add(new Wanderer(new Vector2(500, 500)));
+        _entityManager.Add(new Squarer(new Vector2(200, 100)));
+
     }
     public void Update(GameTime gameTime)
     {

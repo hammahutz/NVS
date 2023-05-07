@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using NVS.Engine;
@@ -13,6 +14,7 @@ public abstract class Enemy : Entity
 
     public abstract List<IEnumerator<int>> Behaviours { get; }
     public abstract Art Art { get; }
+    protected GameTime _gameTime;
 
     public Enemy(Vector2 position) => Position = position;
 
@@ -65,31 +67,62 @@ public abstract class Enemy : Entity
         }
     }
 
-    protected IEnumerable<int> MoveInASquare(GameTime gameTime)
+    protected IEnumerable<int> MoveInASquare()
     {
-        const double timePerSide = 0.5;
+        //TODO Make frameindepentet
+        const int timePerSide = (int)(0.5 * 60);
         while (true)
         {
-            for (double i = timePerSide; i > 0; i -= gameTime.ElapsedGameTime.TotalSeconds)
+            for (int i = timePerSide; i > 0; i--)
             {
                 Direction = Vector2.UnitX;
                 yield return 0;
             }
-            for (double i = timePerSide; i > 0; i -= gameTime.ElapsedGameTime.TotalSeconds)
+            for (int i = timePerSide; i > 0; i--)
             {
                 Direction = Vector2.UnitY;
                 yield return 0;
             }
-            for (double i = timePerSide; i > 0; i -= gameTime.ElapsedGameTime.TotalSeconds)
+            for (int i = timePerSide; i > 0; i--)
             {
                 Direction = -Vector2.UnitX;
                 yield return 0;
             }
-            for (double i = timePerSide; i > 0; i -= gameTime.ElapsedGameTime.TotalSeconds)
+            for (int i = timePerSide; i > 0; i--)
             {
                 Direction = -Vector2.UnitY;
                 yield return 0;
             }
+        }
+    }
+    protected IEnumerable<int> MoveRandomly()
+    {
+        Random rnd = new Random();
+        float direction = rnd.NextFloat(0, MathHelper.TwoPi);
+        Speed = 1f;
+        AngularSpeed = 2f * MathF.PI;
+        //TODO Gör så att RotationDirection alltid är 1 eller -1, bool istället?
+        RoatationDirection = 1f;
+
+
+        while (true)
+        {
+            direction += rnd.NextFloat(0.1f, 0.1f);
+            direction = MathHelper.WrapAngle(direction);
+
+            for (int i = 0; i < 6; i++)
+            {
+                Direction +=  direction.ToAngle();
+
+                var bounds = GameLoop.Viewport.Bounds;
+                bounds.Inflate(-Sprites[0].Gfx.Width, -Sprites[0].Gfx.Height);
+
+                if (!bounds.Contains(Position.ToPoint()))
+                {
+                    direction = (GameLoop.ScreenSize / 2 - Position).ToAngle() + rnd.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);
+                }
+            }
+            yield return 0;
         }
     }
 }

@@ -18,6 +18,10 @@ public class ArtGameplay : ArtHandler
             {Art.GFXBullet, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXBullet])},
             {Art.GFXPointer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXPointer])},
             {Art.GFXSeeker, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXSeeker])},
+            {Art.GFXBlackHole, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXBlackHole])},
+            {Art.GFXGlow, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXGlow])},
+            {Art.GFXLaser, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXLaser])},
+            {Art.GFXWanderer, contentManager.Load<Texture2D>(ArtPath.Paths[Art.GFXWanderer])},
         };
 
         Fonts = new Dictionary<Enum, SpriteFont>()
