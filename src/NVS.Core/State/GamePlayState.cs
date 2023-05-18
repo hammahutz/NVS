@@ -5,7 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 using NVS.Core.GameObject;
+using NVS.Core.GameObject.Enemies;
 using NVS.Engine.GameObject;
+using NVS.Engine.GameObject.Collision;
 using NVS.Engine.Input;
 using NVS.Engine.Interface;
 

@@ -13,8 +13,10 @@ public class Bullet : Entity
         Position = postion;
         Direction = direction;
         Roatation = Velocity.ToAngle();
-        Radius = 8;
+        Radius = 8f;
         Speed = 500;
+
+        CollisionLayer = new BulletCollision();
     }
 
     protected override void UpdateEntity(GameTime gameTime)
@@ -26,4 +28,10 @@ public class Bullet : Entity
 
         Roatation = Direction.ToAngle();
     }
+
+    public override void HandleCollision(Entity other)
+    {
+            System.Console.WriteLine("Enemy is hit :D");
+    }
+
 }

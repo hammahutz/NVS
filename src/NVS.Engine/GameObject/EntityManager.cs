@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using NVS.Engine.GameObject.Collision;
 using NVS.Engine.Interface;
 
 namespace NVS.Engine.GameObject;
@@ -39,7 +41,8 @@ public class EntityManager : IUpdate, IDraw
     public void Update(GameTime gameTime)
     {
         _isUpdateing = true;
-        _entitys.ForEach(e => e.Update(gameTime));
+            CollisionHandler.HandleCollision(_entitys);
+            _entitys.ForEach(e => e.Update(gameTime));
         _isUpdateing = false;
 
         _entitys.AddRange(_addedEntitys.Where(ae => !ae.IsExpired));

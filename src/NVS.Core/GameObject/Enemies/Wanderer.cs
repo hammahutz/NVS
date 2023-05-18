@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace NVS.Core.GameObject;
+namespace NVS.Core.GameObject.Enemies;
 
 public class Wanderer : Enemy
 {
@@ -11,5 +11,5 @@ public class Wanderer : Enemy
 
     public override Art Art => Art.GFXWanderer;
 
-    public override List<IEnumerator<int>> Behaviours => new List<IEnumerator<int>>() { MoveRandomly().GetEnumerator() };
+    public override List<IEnumerator<int>> Behaviours => new List<IEnumerator<int>>() { EnemyBehaviours.MoveRandomly(this).GetEnumerator() };
 }

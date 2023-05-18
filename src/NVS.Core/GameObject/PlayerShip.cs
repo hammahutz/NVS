@@ -39,8 +39,10 @@ public class PlayerShip : Entity
     {
         Sprites = new List<Sprite>();
         Position = GameLoop.ScreenSize / 2;
-        Radius = 10f;
+        Radius = 50f;
         Speed = 200f;
+
+        CollisionLayer = new PlayerCollision();
     }
 
     public override void Load(ArtHandler artHandler) => Sprites.Add(new Sprite(artHandler.GFX[Art.GFXPlayer]));
