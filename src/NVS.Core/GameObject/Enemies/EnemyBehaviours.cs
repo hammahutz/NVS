@@ -28,25 +28,32 @@ public static class EnemyBehaviours
     {
         //TODO Make frameindepentet
         const int timePerSide = (int)(0.5 * 60);
+
+        entity.AngularSpeed = 2f * MathF.PI;
+
         while (true)
         {
             for (int i = timePerSide; i > 0; i--)
             {
+                entity.RoatationDirection = 1f;
                 entity.Direction = Vector2.UnitX;
                 yield return 0;
             }
             for (int i = timePerSide; i > 0; i--)
             {
+                entity.RoatationDirection = -1f;
                 entity.Direction = Vector2.UnitY;
                 yield return 0;
             }
             for (int i = timePerSide; i > 0; i--)
             {
+                entity.RoatationDirection = 1f;
                 entity.Direction = -Vector2.UnitX;
                 yield return 0;
             }
             for (int i = timePerSide; i > 0; i--)
             {
+                entity.RoatationDirection = -1f;
                 entity.Direction = -Vector2.UnitY;
                 yield return 0;
             }
@@ -69,7 +76,7 @@ public static class EnemyBehaviours
 
             for (int i = 0; i < 6; i++)
             {
-                entity.Direction +=  direction.ToAngle();
+                entity.Direction += direction.ToAngle();
 
                 var bounds = GameLoop.Viewport.Bounds;
                 bounds.Inflate(-entity.Sprites[0].Gfx.Width, -entity.Sprites[0].Gfx.Height);

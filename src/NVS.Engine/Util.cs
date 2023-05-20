@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace NVS.Engine;
 
@@ -21,6 +22,16 @@ public static class Util
 
     public static Vector2 FromPolar(float angle, float magnitude) => magnitude * new Vector2(MathF.Cos(angle), MathF.Sin(angle));
 
+    #endregion
+
+    #region Monogame helpers
+    public static void DrawRightAlignedString(SpriteFont spriteFont, string text, float yPosition, int screenWidth, SpriteBatch spriteBatch) => spriteBatch.DrawString
+        (
+            spriteFont,
+            text,
+            new Vector2(screenWidth - spriteFont.MeasureString(text).X - 5, yPosition),
+            Color.White
+        );
     #endregion
 
 }

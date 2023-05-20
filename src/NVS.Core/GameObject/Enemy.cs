@@ -42,9 +42,6 @@ public abstract class Enemy : Entity
             }
         }
     }
-    protected override void DrawEntity(SpriteBatch spriteBatch)
-    {
-    }
 
     public void WasShoot()
     {
@@ -68,6 +65,10 @@ public abstract class Enemy : Entity
         {
             Vector2 distance = Position - other.Position;
             Velocity += 10 * distance / (distance.LengthSquared() + 1);
-        }        
+        }
+        else if(other is Bullet)
+        {
+            WasShoot();
+        }
     }
 }

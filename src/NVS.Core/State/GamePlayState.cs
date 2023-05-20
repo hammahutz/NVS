@@ -16,6 +16,7 @@ namespace NVS.Core.State;
 public class GamePlayState : IState
 {
     private EntityManager _entityManager;
+    private EnemySpawner _enemySpawner;
     private ArtGameplay _gameplayArt;
     public static InputManager _inputManager;
 
@@ -30,6 +31,9 @@ public class GamePlayState : IState
         _gameplayArt = new ArtGameplay();
 
         _entityManager = new EntityManager(_gameplayArt);
+
+        _enemySpawner = new EnemySpawner(_entityManager);
+
         PlayerShip.Instance.SetSpawner(_entityManager);
     }
     public void LoadContent(ContentManager contentMangaer)
@@ -53,6 +57,7 @@ public class GamePlayState : IState
         PlayerShip.Instance.HandleInput(_inputManager);
 
         _entityManager.Update(gameTime);
+        _enemySpawner.Update(gameTime);
     }
     public void Draw(SpriteBatch spriteBatch)
     {

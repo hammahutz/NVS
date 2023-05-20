@@ -9,7 +9,8 @@ using NVS.Core.State;
 using NVS.Engine.Interface;
 
 namespace NVS.Core;
-
+//TODO Fixa Highscore med databas :D
+//TODO Fixa Musik och SFX
 public class GameLoop : Game
 {
     Dictionary<string, IState> States;

@@ -11,5 +11,5 @@ public class Squarer : Enemy
 
     public override List<IEnumerator<int>> Behaviours => new List<IEnumerator<int>>() {EnemyBehaviours.MoveInASquare(this).GetEnumerator()};
 
-    public override Art Art => Art.GFXBlackHole;
+    public override Art Art => Art.GFXSeeker;
 }

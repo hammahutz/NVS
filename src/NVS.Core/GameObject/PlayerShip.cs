@@ -18,6 +18,8 @@ public class PlayerShip : Entity
 
     private Vector2 _aim = Vector2.Zero;
 
+    public PlayerStatus PlayerStatus;
+
     private event EventHandler<OnEntitySpawn> OnSpawn;
 
     private static PlayerShip _instance;
@@ -33,7 +35,7 @@ public class PlayerShip : Entity
         }
     }
 
-
+    public bool IsDead { get; internal set; }
 
     private PlayerShip()
     {
@@ -43,10 +45,14 @@ public class PlayerShip : Entity
         Speed = 200f;
 
         CollisionLayer = new PlayerCollision();
+        PlayerStatus = new PlayerStatus();
     }
 
-    public override void Load(ArtHandler artHandler) => Sprites.Add(new Sprite(artHandler.GFX[Art.GFXPlayer]));
-
+    public override void Load(ArtHandler artHandler)
+    {
+        Sprites.Add(new Sprite(artHandler.GFX[Art.GFXPlayer]));
+        PlayerStatus.Load(artHandler);
+    }
 
     public void SetSpawner(EntityManager entityManager) => OnSpawn += entityManager.SpawnEntity;
 
@@ -55,6 +61,7 @@ public class PlayerShip : Entity
     {
         Movement();
         Aim(gameTime);
+        PlayerStatus.Update(gameTime);
     }
 
     private void Movement()
@@ -94,5 +101,7 @@ public class PlayerShip : Entity
         Direction = inputManager.GetMovementDirection(Position);
         _aim = inputManager.GetAimDirection(Position);
     }
+
+    protected override void DrawEntity(SpriteBatch spriteBatch) => PlayerStatus.Draw(spriteBatch);
 
 }
